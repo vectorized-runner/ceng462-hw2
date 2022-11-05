@@ -1,3 +1,38 @@
+def get_start_coords(graph, graph_size):
+    size_x, size_y = graph_size
+    for x in range(size_x):
+        for y in range(size_y):
+            coords = (x, y)
+            if is_start(graph, coords):
+                return coords
+
+    print("Error: Couldn't find start coordinates")
+    return -1, -1
+
+
+def is_obstacle(graph, coords):
+    return get_letter(graph, coords) == '#'
+
+
+def is_end(graph, coords):
+    return get_letter(graph, coords) == 'E'
+
+
+def is_start(graph, coords):
+    return get_letter(graph, coords) == 'S'
+
+
+def get_letter(graph, coords):
+    x, y = coords
+    return graph[y][x]
+
+
+def get_graph_size(graph):
+    size_x = len(graph[0])
+    size_y = len(graph)
+    return size_x, size_y
+
+
 def parse_file_ucs(file_name):
     f = open(file_name, 'r')
     lines = f.readlines()
@@ -9,12 +44,8 @@ def parse_file_ucs(file_name):
         line = line.replace('\n', '')
         process_lines.append(line)
 
-    print("process")
     print(process_lines)
-
-
-    # TODO
-    return
+    return process_lines
 
 
 def parse_file_astar(file_name):
@@ -23,6 +54,11 @@ def parse_file_astar(file_name):
 
 
 def ucs(graph):
+    graph_size = get_graph_size(graph)
+    start = get_start_coords(graph, graph_size)
+
+    print(f"Start {start}")
+
     # TODO
     return
 
