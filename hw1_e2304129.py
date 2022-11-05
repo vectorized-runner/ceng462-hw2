@@ -33,7 +33,7 @@ def get_graph_size(graph):
     return size_x, size_y
 
 
-def parse_file_ucs(file_name):
+def parse_file(file_name):
     f = open(file_name, 'r')
     lines = f.readlines()
     process_lines = []
@@ -46,11 +46,6 @@ def parse_file_ucs(file_name):
 
     print(process_lines)
     return process_lines
-
-
-def parse_file_astar(file_name):
-    # TODO
-    return
 
 
 def extract_min(queue, costs):
@@ -101,6 +96,7 @@ def construct_path(previous_dict, end):
     return result
 
 
+# We can treat UCS as AStar with 0 Heuristic, don't have to write different algorithms
 def get_heuristic(graph, coords):
     letter = get_letter(graph, coords)
 
@@ -155,22 +151,9 @@ def search(graph):
     return []
 
 
-def astar(graph):
-    # TODO
-    return
-
-
 def InformedSearch(method_name, problem_file_name):
-    if method_name == 'UCS':
-        graph = parse_file_ucs(problem_file_name)
-        return search(graph)
-    elif method_name == 'AStar':
-        graph = parse_file_ucs(problem_file_name)
+    if method_name == 'UCS' or method_name == 'AStar':
+        graph = parse_file(problem_file_name)
         return search(graph)
     else:
         print("Unexpected method name: " + method_name)
-
-
-if __name__ == '__main__':
-    print(InformedSearch("UCS", "sampleUCS.txt"))
-    print("Done!")
