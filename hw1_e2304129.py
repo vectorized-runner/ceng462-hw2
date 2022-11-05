@@ -81,6 +81,7 @@ def get_potential_neighbors(coords):
     result.append((x, y + 1))
     return result
 
+
 def get_walkable_neighbors(graph, graph_size, coords):
     result = []
     for potential in get_potential_neighbors(coords):
@@ -100,7 +101,23 @@ def construct_path(previous_dict, end):
     return result
 
 
-def ucs(graph):
+def get_heuristic(graph, coords):
+    letter = get_letter(graph, coords)
+
+    if letter == '.':
+        return 0
+    elif letter == 'E':
+        return 0
+    elif letter == 'S':
+        return 0
+    elif letter == '#':
+        print("Error: Shouldn't query blocked cell")
+        return -1
+
+    return int(letter)
+
+
+def search(graph):
     graph_size = get_graph_size(graph)
     start = get_start_coords(graph, graph_size)
     frontier = []
@@ -124,7 +141,8 @@ def ucs(graph):
 
         for neighbor in get_walkable_neighbors(graph, graph_size, current_coords):
             if neighbor not in expanded:
-                update_cost = current_cost + 1
+                print(neighbor)
+                update_cost = current_cost + 1 + get_heuristic(graph, neighbor)
                 if neighbor not in frontier:
                     frontier.append(neighbor)
                     costs[neighbor] = update_cost
@@ -145,10 +163,10 @@ def astar(graph):
 def InformedSearch(method_name, problem_file_name):
     if method_name == 'UCS':
         graph = parse_file_ucs(problem_file_name)
-        return ucs(graph)
+        return search(graph)
     elif method_name == 'AStar':
-        graph = parse_file_astar(problem_file_name)
-        return astar(graph)
+        graph = parse_file_ucs(problem_file_name)
+        return search(graph)
     else:
         print("Unexpected method name: " + method_name)
 
