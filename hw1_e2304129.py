@@ -88,9 +88,18 @@ def get_walkable_neighbors(graph, graph_size, coords):
     return result
 
 
+def construct_path(previous_dict, end):
+    result = []
+    current = end
+    while current is not None:
+        result.append(current)
+        current = previous_dict[current]
+
+    return result
+
+
 def ucs(graph):
     graph_size = get_graph_size(graph)
-    size_x, size_y = graph_size
     start = get_start_coords(graph, graph_size)
     frontier = []
     expanded = set()
@@ -107,10 +116,9 @@ def ucs(graph):
         current_cost = costs[current_coords]
 
         if is_end(graph, current_coords):
-            #TODO: Return solution
-            return []
+            return construct_path(previous, current_coords)
 
-        expanded.append(current_coords)
+        expanded.add(current_coords)
 
         for neighbor in get_walkable_neighbors(graph, graph_size, current_coords):
             if neighbor not in expanded:
@@ -125,19 +133,6 @@ def ucs(graph):
 
     print("Error: Shouldn't reach here!")
     return []
-
-
-
-
-    # We need a frontier queue (to-search)
-    # We need a cost-from-start
-    # All cost-from-start initialized to zero by default
-    # We need a
-
-    print(f"Start {start}")
-
-    # TODO
-    return
 
 
 def astar(graph):
