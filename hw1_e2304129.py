@@ -1,4 +1,18 @@
 def parse_file_ucs(file_name):
+    f = open(file_name, 'r')
+    lines = f.readlines()
+    process_lines = []
+
+    # Replace tabs and newlines with empty string, so we can use this graph easily
+    for line in lines:
+        line = line.replace('\t', '')
+        line = line.replace('\n', '')
+        process_lines.append(line)
+
+    print("process")
+    print(process_lines)
+
+
     # TODO
     return
 
@@ -30,4 +44,5 @@ def InformedSearch(method_name, problem_file_name):
 
 
 if __name__ == '__main__':
-    print('PyCharm')
+    print(InformedSearch("UCS", "sampleUCS.txt"))
+    print("Done!")
