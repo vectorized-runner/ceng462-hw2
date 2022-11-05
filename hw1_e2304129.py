@@ -44,7 +44,6 @@ def parse_file(file_name):
         line = line.replace('\n', '')
         process_lines.append(line)
 
-    print(process_lines)
     return process_lines
 
 
@@ -137,7 +136,6 @@ def search(graph):
 
         for neighbor in get_walkable_neighbors(graph, graph_size, current_coords):
             if neighbor not in expanded:
-                print(neighbor)
                 update_cost = current_cost + 1 + get_heuristic(graph, neighbor)
                 if neighbor not in frontier:
                     frontier.append(neighbor)
