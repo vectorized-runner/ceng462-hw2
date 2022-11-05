@@ -69,10 +69,12 @@ def is_within_graph(graph_size, coords):
 def get_potential_neighbors(coords):
     result = []
     x, y = coords
+    # Left, Up, Right, Down, order is important
     result.append((x - 1, y))
-    result.append((x + 1, y))
     result.append((x, y - 1))
+    result.append((x + 1, y))
     result.append((x, y + 1))
+
     return result
 
 
