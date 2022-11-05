@@ -67,7 +67,9 @@ def extract_min(queue, costs):
 
 
 def is_within_graph(graph_size, coords):
-    return graph_size[0] > coords[0] and graph_size[1] > coords[1]
+    size_x, size_y = graph_size
+    x, y = coords
+    return size_x > x >= 0 and size_y > y >= 0
 
 
 def get_potential_neighbors(coords):
