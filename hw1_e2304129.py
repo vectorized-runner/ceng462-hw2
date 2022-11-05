@@ -1,21 +1,20 @@
-
-
 def parse_file_ucs(file_name):
-    #TODO
+    # TODO
     return
 
 
 def parse_file_astar(file_name):
-    #TODO
+    # TODO
     return
 
 
 def ucs(graph):
-    #TODO
+    # TODO
     return
 
+
 def astar(graph):
-    #TODO
+    # TODO
     return
 
 
@@ -29,3 +28,6 @@ def InformedSearch(method_name, problem_file_name):
     else:
         print("Unexpected method name: " + method_name)
 
+
+if __name__ == '__main__':
+    print('PyCharm')
